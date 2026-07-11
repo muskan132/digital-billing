@@ -1,0 +1,17 @@
+# Ownership follows the eight fixed logical domains (docs/00_Project_Brain.md §6).
+# Update via PR when track ownership changes; do not add domains not in the fixed list.
+
+/services/ingestion/      @digital-billing-core/ingestion
+/services/orchestration/  @digital-billing-core/orchestration
+/services/dispatch/       @digital-billing-core/dispatch
+/services/config/         @digital-billing-core/config
+/services/crm/            @digital-billing-core/crm
+/services/analytics/      @digital-billing-core/analytics
+/services/bff/            @digital-billing-core/bff
+/services/compliance/     @digital-billing-core/compliance
+
+/libs/                    @digital-billing-core/platform
+/apps/                    @digital-billing-core/platform
+
+/docs/                    @digital-billing-core/platform
+/.github/                 @digital-billing-core/platform

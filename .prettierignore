@@ -1,0 +1,9 @@
+node_modules
+dist
+*.docx
+*.xlsx
+
+# Pre-existing prose content not owned by this task's format config (F-01).
+# Revisit scope with an explicit roadmap task if these should be enforced too.
+docs/
+.claude/
