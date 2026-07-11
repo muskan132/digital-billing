@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-lint-test:
+    name: Install, lint, typecheck, test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # npm's --workspaces flag errors ("No workspaces found!") when zero
+      # workspace packages exist yet; --if-present alone doesn't cover that
+      # case. Guard so the step is a true no-op until the first
+      # services/*, libs/*, or apps/* package.json appears.
+      - name: Typecheck (per package, skips packages without a typecheck script)
+        run: |
+          if find services libs apps -maxdepth 2 -name package.json 2>/dev/null | grep -q .; then
+            npm run typecheck --workspaces --if-present
+          else
+            echo "No workspace packages yet; skipping typecheck."
+          fi
+
+      - name: Unit tests (per package, skips packages without a test script)
+        run: |
+          if find services libs apps -maxdepth 2 -name package.json 2>/dev/null | grep -q .; then
+            npm test --workspaces --if-present
+          else
+            echo "No workspace packages yet; skipping unit tests."
+          fi
+
+  dependency-audit:
+    name: Dependency audit (report only)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Report-only: does not fail CI. Gating is deferred until the project
+      # stabilizes (F-02 decision) — revisit as a follow-up roadmap task.
+      - name: npm audit (report only, non-blocking)
+        continue-on-error: true
+        run: npm audit --audit-level=high | tee npm-audit-report.txt
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: npm-audit-report.txt

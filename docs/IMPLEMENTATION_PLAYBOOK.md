@@ -21,6 +21,14 @@ No step may be skipped, reordered, or merged. If any step cannot complete, stop 
 
 ---
 
+## 0.1 Execution environment
+
+This repository is developed on **Windows 11, PowerShell as the primary shell.** Every command run during an implementation session — locally, for verification, for scaffolding — must be PowerShell-compatible.
+
+- Do not generate or run Bash-specific syntax: `find`, `grep`, `sed`, `awk`, `2>/dev/null`, POSIX `if [ ]`/`&&` chains, or Linux-only shell scripts.
+- Use PowerShell equivalents instead (`Get-ChildItem`/`Where-Object` for `find`, `Select-String` for `grep`, etc.), or the dedicated tool for the job (file search, content search, file read/edit) rather than a shelled-out Unix command.
+- **Exception:** CI workflow YAML (`.github/workflows/*.yml`) runs on `runs-on: ubuntu-latest` GitHub-hosted runners — bash is the correct and expected shell *inside those jobs*. This rule governs the developer's local/session shell, not the Linux CI runner's own steps.
+
 ## 1. The pipeline, step by step
 
 ### Step 1 — Read Brain
@@ -209,3 +217,29 @@ If STATE.md is missing: rebuild it from newest CP-* per track + DECISIONS tail +
 ```
 
 *Consistent with FSD v1.0, Blueprint v1.2, TDS v1.0, Roadmap (262 tasks). Changes to this playbook are ADR-logged.*
+## Development Environment
+
+Operating System
+- Windows 11
+
+Primary Shell
+- PowerShell
+
+Editor
+- VS Code
+
+Package Manager
+- npm
+
+Git
+- Git for Windows
+
+Docker
+- Docker Desktop
+
+When generating commands:
+
+- Always generate PowerShell commands unless explicitly asked for Bash.
+- Never assume Linux utilities such as grep, sed, awk or find are available.
+- Do not use /dev/null.
+- Use PowerShell equivalents.
