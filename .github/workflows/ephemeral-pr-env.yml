@@ -1,0 +1,37 @@
+name: Ephemeral PR Environment
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ephemeral-env:
+    name: Provision ephemeral per-PR environment (touched service)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Detect touched service(s) and resolve compose definitions
+        run: |
+          git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} > /tmp/changed-files.txt
+          node platform/pr-environments/detect.mjs /tmp/changed-files.txt > /tmp/pr-env-plan.json
+          cat /tmp/pr-env-plan.json
+
+      - name: Provision ephemeral environment(s) where a compose definition exists
+        run: node platform/pr-environments/provision.mjs /tmp/pr-env-plan.json /tmp/pr-env-started.json
+
+      - name: Write job summary
+        if: always()
+        run: node platform/pr-environments/summarize.mjs /tmp/pr-env-plan.json /tmp/pr-env-started.json >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Tear down ephemeral environment(s)
+        if: always()
+        run: node platform/pr-environments/teardown.mjs /tmp/pr-env-started.json

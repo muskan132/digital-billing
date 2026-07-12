@@ -258,3 +258,5 @@ Canonical architecture decisions are stored under:
 docs/adr/
 
 All implementation work must follow approved ADRs before introducing new architectural decisions.
+
+Repository Markdown documents are the canonical working source. The original Engineering Execution Roadmap.xlsx is archival only. Never parse the XLSX unless explicitly instructed.

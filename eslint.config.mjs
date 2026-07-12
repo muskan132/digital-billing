@@ -13,4 +13,13 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "error",
     },
   },
+  {
+    files: ["**/*.mjs"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly",
+      },
+    },
+  },
 );

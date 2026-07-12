@@ -4,12 +4,12 @@
 **As of:** 2026-07-12 · **Phase:** P0 Foundation (in progress) · **Docs:** FSD v1.0 (frozen), Blueprint v1.2, TDS v1.0, Roadmap 262 tasks
 
 ## Where we are
-- Foundation track underway. CD gate mechanics (F-03) implemented as declarative artifacts + CI checks, no vendor/engine chosen yet (ADR-011 deferral).
-- Next action: Verify and begin the next unblocked Foundation task (expected: F-04).
+- Foundation track underway. F-04 (ephemeral per-PR environment) implemented as GitHub Actions job-scoped containers only, no vendor/platform chosen (ADR-011 deferral not yet triggered).
+- Next action: identify the next unblocked Foundation task (expected: F-05 — the ADR-011 mandatory vendor-decision trigger is expected here or at F-06).
 
 ## High-water marks (furthest done per track)
 ```
-F:F-03  X:—  ING:—  ORCH:—  DISP:—  CFG:—  CRM:—  ANL:—  BFF:—  CMP:—  INT:—  HRD:—  LNCH:—
+F:F-04  X:—  ING:—  ORCH:—  DISP:—  CFG:—  CRM:—  ANL:—  BFF:—  CMP:—  INT:—  HRD:—  LNCH:—
 ```
 (— = not started. Update the prefix to the last completed task, e.g. `ING:ING-18`.)
 
@@ -34,6 +34,7 @@ Completed
 ✓ F-01
 ✓ F-02
 ✓ F-03
+✓ F-04
 
 Current Phase
 
@@ -41,6 +42,6 @@ Foundation
 
 Next Task
 
-F-04
+F-05
 
 <!-- consistent with FSD v1.0, Blueprint v1.2, TDS v1.0 -->

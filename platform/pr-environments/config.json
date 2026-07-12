@@ -1,0 +1,4 @@
+{
+  "servicesRoot": "services",
+  "composeFilename": "docker-compose.ci.yml"
+}
