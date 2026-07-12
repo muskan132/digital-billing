@@ -243,3 +243,13 @@ When generating commands:
 - Never assume Linux utilities such as grep, sed, awk or find are available.
 - Do not use /dev/null.
 - Use PowerShell equivalents.
+
+## Session Recovery
+
+If a previous Claude Code session has ended:
+
+- Never attempt to recover temporary extracted files.
+- Never search /tmp or OS temp directories.
+- Re-read canonical files from the repository.
+- Assume temporary analysis artifacts are lost.
+- The repository is always the source of truth.
