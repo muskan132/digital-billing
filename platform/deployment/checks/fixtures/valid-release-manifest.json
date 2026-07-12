@@ -1,0 +1,4 @@
+{
+  "migrations": [{ "name": "expand_legacy_x", "phase": "expand", "column": "legacy_x" }],
+  "codeChanges": [{ "type": "start-using-column", "column": "legacy_x" }]
+}

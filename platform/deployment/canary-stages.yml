@@ -1,0 +1,21 @@
+# Declarative canary stage configuration (ADR-010 §4, §5).
+# Stage fractions are fixed by the roadmap (F-03: 5/25/100). Dwell times are
+# explicitly deferred (ADR-010 "Deferred Decisions") pending fleet sizing
+# after peak-TPS ratification (Brain §21.4) — not invented here.
+stages:
+  - fraction: 5
+  - fraction: 25
+  - fraction: 100
+
+# Each stage advances only on automatic evaluation of ALL of the following
+# (ADR-010 §5): golden signals + domain signals, evaluated against
+# error-budget burn, never a fixed threshold alone.
+gateSignals:
+  golden:
+    - error_rate
+    - p95_latency
+    - saturation
+  domain:
+    - bill_generation_success_rate
+    - dispatch_success_rate
+    - reconciliation_drift

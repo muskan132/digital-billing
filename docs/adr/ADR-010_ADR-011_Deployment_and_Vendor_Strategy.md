@@ -1,8 +1,6 @@
-# ADR-009 — Deployment Architecture Principles
+# ADR-010 — Deployment Architecture Principles
 
-> **Numbering conflict — resolve before merging into DECISIONS.md.** `tech-stack.md` reserves ADR-9 for implementation-stack ratification (Blueprint Checklist #3 companion). Either (a) ratify the stack ADR first and renumber this to ADR-010, or (b) formally reassign the stack ADR a new number via a superseding entry. Do not let two ADRs share a number in an append-only ledger.
-
-**Status:** Proposed · **Date:** 2026-07-12 · **Consistent with:** FSD v1.0-r1, Blueprint v1.2 (§13, §15, §16, §19), TDS v1.0-r1, Methodology v1.0 Phase 5, architecture.md
+**Status:** Approved · **Date:** 2026-07-12 · **Consistent with:** FSD v1.0-r1, Blueprint v1.2 (§13, §15, §16, §19), TDS v1.0-r1, Methodology v1.0 Phase 5, architecture.md
 
 ## Context
 
@@ -88,7 +86,7 @@ An engine that cannot pass a seeded failure test for any row does not conform, r
 - **Per-service deployment policies.** Rejected: violates the single-write-path spirit — one deployment contract, uniformly enforced, mirrors the "no second implementation path" rule.
 
 ## Deferred Decisions
-- Concrete engine/tooling mapping (belongs to the vendor decision, governed by ADR-010 and Blueprint Checklist #3).
+- Concrete engine/tooling mapping (belongs to the vendor decision, governed by ADR-011 and Blueprint Checklist #3).
 - Canary stage count, fractions, and dwell times per tier (config, set with fleet sizing after peak-TPS ratification); gate-spec file format.
 - Region/topology specifics of promotion environments (pending data-residency ruling, Checklist #4).
 
@@ -107,11 +105,9 @@ Foundation CI/CD tasks (F track), every service's operability-gate task, HRD (ha
 
 ---
 
-# ADR-010 — Vendor Selection Strategy
+# ADR-011 — Vendor Selection Strategy
 
-> Same numbering caveat as above: if ADR-9 (stack ratification) is renumbered or ratified first, renumber accordingly. This ADR governs *process*; it selects nothing.
-
-**Status:** Proposed · **Date:** 2026-07-12 · **Consistent with:** Blueprint v1.2 (§18, §18.1, Checklist #3), architecture.md, tech-stack.md, Methodology 1.4/2.5
+**Status:** Approved · **Date:** 2026-07-12 · **Consistent with:** Blueprint v1.2 (§18, §18.1, Checklist #3), architecture.md, tech-stack.md, Methodology 1.4/2.5
 
 ## Context
 
@@ -129,7 +125,7 @@ Vendor decisions follow this standing process. No product is selected by this AD
 A vendor decision becomes mandatory at the **first roadmap task that provisions or consumes the real primitive** — i.e., when a stub/fake behind the repository or adapter interface would otherwise ship toward production. Concretely: real environment provisioning, first load test against real stores (Checklist #8), and in all cases **before Blueprint Checklist #3 sign-off gates the corresponding epic**. Local development and CI may run on fakes/containers indefinitely; production-path tasks may not.
 
 ### 3. How adapters isolate infrastructure
-- Every infrastructure dependency sits behind a **repository interface or port/adapter** (architecture.md, tech-stack.md): Bill Store behind put-if-absent/get/query-by-partition; providers behind the Dispatch port; the deployment engine behind the ADR-009 §10 contract.
+- Every infrastructure dependency sits behind a **repository interface or port/adapter** (architecture.md, tech-stack.md): Bill Store behind put-if-absent/get/query-by-partition; providers behind the Dispatch port; the deployment engine behind the ADR-010 §10 contract.
 - Vendor-specific payloads, options, and semantics never leak past the adapter into domain logic, controllers, or client contracts.
 - Each adapter classified high-lock-in in §18.1 names a **portable fallback**, and the fallback is exercised in a **quarterly compatibility test** against the repository contract. This obligation attaches only where §18.1 names a fallback (Bill Store today) — it is not a blanket duty invented for every adapter.
 
@@ -152,7 +148,7 @@ Every vendor decision produces: the ADR (append-only in DECISIONS.md), an update
 ### 7. Migration expectations
 - Low-lock-in components (Kafka protocol, Postgres, Redis, object storage): migration = re-point the adapter config; no domain change; rehearsed implicitly by using only open semantics.
 - High-lock-in components: migration path is the named fallback, kept honest by the quarterly compatibility test; a failing compatibility test is a paged debt-register entry, not a silent decay.
-- Any migration follows expand–contract at the data layer and ADR-009 promotion/rollback rules at the deploy layer. A vendor with no priced exit may not enter the system.
+- Any migration follows expand–contract at the data layer and ADR-010 promotion/rollback rules at the deploy layer. A vendor with no priced exit may not enter the system.
 
 ### 8. Interaction with roadmap tasks
 - Tasks that can complete against fakes/adapters proceed without vendor decisions; the adapter contract is their definition of done.
@@ -170,7 +166,7 @@ Every vendor decision produces: the ADR (append-only in DECISIONS.md), an update
 - **Hard multi-vendor abstraction for everything (run two of each).** Rejected: pays permanent complexity for exit options already secured more cheaply by adapters + fallback tests.
 
 ## Deferred Decisions
-All concrete vendor mappings (Checklist #3), including the deployment engine binding for ADR-009 §10. Data-residency-driven regional constraints (Checklist #4) may narrow candidate sets and must be closed before high-lock-in mappings are signed.
+All concrete vendor mappings (Checklist #3), including the deployment engine binding for ADR-010 §10. Data-residency-driven regional constraints (Checklist #4) may narrow candidate sets and must be closed before high-lock-in mappings are signed.
 
 ## Affected Roadmap Tasks
 Every task provisioning real infrastructure or first exercising a real primitive (environment setup, load-test, DR-drill, launch tracks); every adapter-construction task inherits §3–§4 as acceptance criteria. *(Task-ID mapping pending readable roadmap — see evaluation.)*

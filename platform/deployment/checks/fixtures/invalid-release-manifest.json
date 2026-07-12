@@ -1,0 +1,4 @@
+{
+  "migrations": [{ "name": "drop_legacy_x", "phase": "contract", "column": "legacy_x" }],
+  "codeChanges": [{ "type": "stop-using-column", "column": "legacy_x" }]
+}

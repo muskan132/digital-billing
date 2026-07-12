@@ -1,0 +1,12 @@
+{
+  "artifactDigest": "sha256:abc123",
+  "artifactVersion": "1.0.0",
+  "fsdVersionImplemented": "v1.0",
+  "gateResults": [
+    { "gate": "unit-tests", "passed": true, "evidence": "CI run #123" },
+    { "gate": "contract-tests", "passed": true, "evidence": "CI run #123" }
+  ],
+  "promotedBy": "ci-automation",
+  "promotedAt": "2026-07-12T00:00:00Z",
+  "migrations": []
+}

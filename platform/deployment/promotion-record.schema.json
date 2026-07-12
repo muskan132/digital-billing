@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "platform/deployment/promotion-record.schema.json",
+  "title": "Promotion Record",
+  "description": "Immutable evidence record for one environment promotion (ADR-010 §3). A promotion missing any required field is invalid.",
+  "type": "object",
+  "required": [
+    "artifactDigest",
+    "artifactVersion",
+    "fsdVersionImplemented",
+    "gateResults",
+    "promotedBy",
+    "promotedAt",
+    "migrations"
+  ],
+  "properties": {
+    "artifactDigest": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Content-addressed/digest identity of the one immutable artifact being promoted."
+    },
+    "artifactVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fsdVersionImplemented": {
+      "type": "string",
+      "minLength": 1,
+      "description": "FSD version this release implements (Blueprint §19 release policy)."
+    },
+    "gateResults": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["gate", "passed", "evidence"],
+        "properties": {
+          "gate": { "type": "string", "minLength": 1 },
+          "passed": { "type": "boolean" },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "promotedBy": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Promoting identity, human or automation."
+    },
+    "promotedAt": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ISO 8601 timestamp."
+    },
+    "migrations": {
+      "type": "array",
+      "description": "Migration set included in this promotion, each tagged by expand/migrate/contract phase (ADR-010 §7). May be empty.",
+      "items": {
+        "type": "object",
+        "required": ["name", "phase"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "phase": { "type": "string", "enum": ["expand", "migrate", "contract"] },
+          "column": { "type": "string" }
+        }
+      }
+    }
+  }
+}

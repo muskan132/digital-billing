@@ -1,0 +1,8 @@
+{
+  "artifactDigest": "sha256:abc123",
+  "artifactVersion": "1.0.0",
+  "gateResults": [],
+  "promotedBy": "ci-automation",
+  "promotedAt": "2026-07-12T00:00:00Z",
+  "migrations": [{ "name": "add_column_x" }]
+}
