@@ -250,3 +250,11 @@ All flagged stubs are release-gated; flag removal is closed in the LNCH track.
 
 ---
 *Consistent with FSD v1.0, Blueprint v1.2, TDS v1.0, Roadmap (262 tasks). Regenerate this file only via an ADR-logged change.*
+
+## Architecture Decision Records (ADRs)
+
+Canonical architecture decisions are stored under:
+
+docs/adr/
+
+All implementation work must follow approved ADRs before introducing new architectural decisions.

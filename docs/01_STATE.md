@@ -29,3 +29,17 @@ F:—  X:—  ING:—  ORCH:—  DISP:—  CFG:—  CRM:—  ANL:—  BFF:—  C
 - Owner: — · Track: — · Task: — (set at session start; cleared at session end.)
 
 <!-- consistent with FSD v1.0, Blueprint v1.1, TDS v1.0 -->
+
+Completed
+
+✓ F-01
+✓ F-02
+
+Architecture
+
+✓ ADR-009 approved
+✓ ADR-010 approved
+
+Next Action
+
+Implement F-03

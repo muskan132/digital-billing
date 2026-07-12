@@ -87,3 +87,13 @@ At the beginning of every implementation session:
 4.  Identify the next roadmap task.
 5.  List blockers and assumptions.
 6.  Wait for user approval before making changes.
+
+# Canonical Documentation
+
+The original Microsoft Office documents remain the canonical archival copies.
+
+The Markdown versions are lossless conversions intended for implementation agents such as Claude Code.
+
+Implementation agents should read the Markdown versions by default.
+
+If a discrepancy is ever discovered between a Markdown file and its corresponding Office document, the Office document is authoritative until the Markdown copy is updated.
