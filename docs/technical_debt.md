@@ -15,17 +15,14 @@ Add Docker build, image publishing and signing when first service is runnable.
 Priority
 Medium
 
-TD-001
+TD-002
 Review .prettierignore after repository stabilizes.
 
-TD-002
+TD-003
 Replace placeholder CODEOWNERS.
 
-TD-003
-Review Git line-ending configuration.
-
 TD-004
-Implement Docker image build pipeline after first deployable service exists.
+Review Git line-ending configuration.
 
 TD-005
 Implement Cosign image signing after container publishing exists.
@@ -62,3 +59,33 @@ Set dwell-time values in `platform/deployment/canary-stages.yml` once peak-TPS i
 
 Priority
 Low
+
+TD-009
+Title: Brain repository-structure diagram out of sync with repo
+
+Reason
+00_Project_Brain.md §15 describes a context/ directory (context/STATE.md, DECISIONS.md, checkpoints/, sessions/log/, progress/PROGRESS.md) that does not exist; actual files are docs/01_STATE.md and docs/decision.md, with no checkpoints/session-log/progress files at all. Brain is regenerated only via an ADR-logged change, so this is not a same-session fix.
+
+Deferred From
+F-01 through F-03 review
+
+Future Task
+Reconcile Brain §15 with the real repository layout via an ADR-logged Brain update, or stand up the missing context/ artifacts to match Brain.
+
+Priority
+Medium
+
+TD-010
+Title: Missing per-task checkpoint files
+
+Reason
+IMPLEMENTATION_PLAYBOOK.md Step 11 requires a CP-<TASKID>.md checkpoint per completed task, but no checkpoint files exist for F-01, F-02, or F-03.
+
+Deferred From
+F-01 through F-03 review
+
+Future Task
+Backfill CP-F-01.md, CP-F-02.md, CP-F-03.md (what changed / how to verify / how to roll back) once the checkpoint storage location is reconciled with TD-009.
+
+Priority
+Medium

@@ -14,8 +14,8 @@
 ## Reading Order
 
 1.  `docs/00_Project_Brain.md`
-2.  `docs/01_Project_State.md`
-3.  `docs/02_Session_Context.md`
+2.  `docs/01_STATE.md`
+3.  `docs/02_CONTEXT_SYSTEM.md`
 4.  `docs/IMPLEMENTATION_PLAYBOOK.md`
 5.  `docs/product/`
 6.  `docs/architecture/`
@@ -48,14 +48,15 @@ Session Context → Suggest commit → Stop.
     docs/
     ├── README.md
     ├── 00_Project_Brain.md
-    ├── 01_Project_State.md
-    ├── 02_Session_Context.md
+    ├── 01_STATE.md
+    ├── 02_CONTEXT_SYSTEM.md
     ├── IMPLEMENTATION_PLAYBOOK.md
     ├── product/
     ├── architecture/
     ├── planning/
     ├── rules/
-    └── decisions/
+    ├── adr/
+    └── decision.md
 
 ## Before Writing Code
 
